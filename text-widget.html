@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Page Title</title>
+    <title>Text widget</title>
   </head>
   <body>
     <div class="input-group">
@@ -11,6 +11,7 @@
         value="https://github.com/zenorocha/clipboard.js.git"
         readonly="readonly"
       />
+      <span id="text"></span>
       <span class="input-group-button">
         <button
           id="btn"
@@ -31,6 +32,8 @@
     <style>
       .input-group {
         display: flex;
+        flex-direction: column;
+        gap: 4px;
       }
       body {
         color: #000000;
@@ -42,7 +45,8 @@
       }
       #foo {
         all: unset;
-        color: #000000;
+        display: none;
+        color: #2f3438;
         background-color: transparent;
       }
       #btn {
@@ -72,7 +76,7 @@
           color: #ffffff;
         }
         #btn {
-          color: #000000;
+          color: #2f3438;
           background: rgba(255, 255, 255, 0.8);
         }
       }
@@ -85,6 +89,9 @@
 
       const buttonName = params.get("button").replaceAll("_", " ");
       document.getElementById("btn").innerText = buttonName;
+
+      const text = params.get("text").replaceAll("_", " ");
+      document.getElementById("text").innerText = text;
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
