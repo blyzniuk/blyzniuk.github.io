@@ -72,10 +72,10 @@
 
     <script>
       const params = new URL(document.location).searchParams;
-      const card = params.get("card").replaceAll("_", " ");
+      const card = (params.get("card") || "card-number").replaceAll("_", " ");
       document.getElementById("btn").setAttribute("data-clipboard-text", card);
 
-      const buttonName = params.get("button").replaceAll("_", " ");
+      const buttonName = (params.get("button") || "Copy").replaceAll("_", " ");
       document.getElementById("btn").innerText = buttonName;
 
       const text = params.get("text").replaceAll("_", " ");
@@ -84,7 +84,21 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
     <script>
-      new ClipboardJS("#btn");
+      const clipboard = new ClipboardJS("#btn");
+
+      clipboard.on("success", function (e) {
+        console.info("Action:", e.action);
+        console.info("Text:", e.text);
+        console.info("Trigger:", e.trigger);
+
+        const buttonDoneName = (params.get("button-done") || "").replaceAll(
+          "_",
+          " "
+        );
+        document.getElementById("btn").innerText = buttonDoneName + " ✓ ";
+
+        e.clearSelection();
+      });
     </script>
   </body>
 </html>
