@@ -5,20 +5,9 @@
   </head>
   <body>
     <div class="input-group">
-      <input
-        id="foo"
-        type="text"
-        value="https://github.com/zenorocha/clipboard.js.git"
-        readonly="readonly"
-      />
-      <span id="text"></span>
+      <span id="text">Press button to copy card</span>
       <span class="input-group-button">
-        <button
-          id="btn"
-          type="button"
-          data-clipboard-demo=""
-          data-clipboard-target="#foo"
-        >
+        <button id="btn" type="button">
           <img
             class="clippy"
             src="clippy.svg"
@@ -42,12 +31,6 @@
         font-size: 14px;
         font-weight: 500;
         line-height: 20px;
-      }
-      #foo {
-        all: unset;
-        display: none;
-        color: #2f3438;
-        background-color: transparent;
       }
       #btn {
         color: #333333;
@@ -85,7 +68,7 @@
     <script>
       const params = new URL(document.location).searchParams;
       const card = params.get("card").replaceAll("_", " ");
-      document.getElementById("foo").value = card;
+      document.getElementById("btn").setAttribute("data-clipboard-text", card);
 
       const buttonName = params.get("button").replaceAll("_", " ");
       document.getElementById("btn").innerText = buttonName;
